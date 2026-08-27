@@ -3,18 +3,18 @@ import requests
 
 st.set_page_config(page_title="DocuLearn AI", page_icon="📚", layout="centered")
 
-st.title("📚 DocuLearn AI Companion")
+st.title("📚 DocuLearn AI ")
 st.caption("A Smart RAG-based FYP Assistant for Interactive Document Learning")
 
 BACKEND_URL = "http://127.0.0.1:8000"
 
 # Sidebar: File Upload
 st.sidebar.header("PDF Upload Center")
-uploaded_file = st.sidebar.file_uploader("Apni PDF file yahan choose karein", type=["pdf"])
+uploaded_file = st.sidebar.file_uploader("Upload your PDF file here", type=["pdf"])
 
 if uploaded_file is not None:
     if st.sidebar.button("Upload & Process PDF"):
-        with st.spinner("PDF process aur index ho rahi hai..."):
+        with st.spinner(""Processing and indexing PDF..."):
             files = {"file": (uploaded_file.name, uploaded_file.getvalue(), "application/pdf")}
             try:
                 res = requests.post(f"{BACKEND_URL}/upload-and-index/", files=files)
@@ -38,7 +38,7 @@ for msg in st.session_state.messages:
             st.caption(f"📍 **Source Page Numbers:** {', '.join(map(str, msg['pages']))}")
 
 # User Question Input
-if user_query := st.chat_input("PDF ke mutaliq sawal poochen..."):
+if user_query := st.chat_input("Ask a question based on the PDF:"):
     st.session_state.messages.append({"role": "user", "content": user_query})
     with st.chat_message("user"):
         st.write(user_query)
