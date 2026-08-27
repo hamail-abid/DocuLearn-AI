@@ -9,8 +9,11 @@ st.caption("A Smart RAG-based FYP Assistant for Interactive Document Learning")
 BACKEND_URL = "http://127.0.0.1:8000"
 
 # Sidebar: File Upload
-st.sidebar.header("PDF Upload Center")
-uploaded_file = st.sidebar.file_uploader("Upload your PDF file here", type=["pdf"])
+st.sidebar.header("Document Upload Center")
+uploaded_file = st.sidebar.file_uploader(
+    "Upload your document here (PDF, DOCX, PPTX, TXT)", 
+    type=["pdf", "docx", "pptx", "txt"]
+)
 
 if uploaded_file is not None:
     if st.sidebar.button("Upload & Process PDF"):
